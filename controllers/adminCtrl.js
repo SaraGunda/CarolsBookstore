@@ -14,7 +14,7 @@ module.exports = {
   },
   admin_books: (request, response) => {
     if(request.isAuthenticated()){
-      Book.find({}, (error, allBooks) => {
+      Book.find({}).then(allBooks => {
         if(error){
           return error;
         } else {
@@ -39,7 +39,7 @@ module.exports = {
   },
   admin_authors: (request, response) => {
     if(request.isAuthenticated()){
-      Author.find({}, (error, allAuthors) => {
+      Author.find({}).then(allAuthors => {
         if(error){
           return error;
         } else {
@@ -65,7 +65,7 @@ module.exports = {
   book_update_get: (request, response) => {
     if(request.isAuthenticated()){
       const { _id } = request.params;
-      Book.findOne({_id: _id}, (error, foundBook) => {
+      Book.findOne({_id: _id}).then(foundBook => {
         if(error) {
           return error;
         } else {
@@ -82,7 +82,7 @@ module.exports = {
   author_update_get: (request, response) => {
     if(request.isAuthenticated()){
       const { _id } = request.params;
-      Author.findOne({_id: _id}, (error, foundAuthor) => {
+      Author.findOne({_id: _id}).then(foundAuthor => {
         if(error) {
           return error;
         } else {

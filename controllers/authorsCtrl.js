@@ -3,7 +3,7 @@ const Author = require('../models/authorModel');
 
 module.exports = {
   all_authors: (request, response) => {
-    Author.find({}, (error, allAuthors) => {
+    Author.find({}).then(allAuthors => {
       if(error){
         return error;
       } else {
@@ -16,7 +16,7 @@ module.exports = {
   },
   author_detail: (request, response) => {
     const {_id} = request.params;
-    Author.findOne({_id: _id}, (error, foundAuthor) => {
+    Author.findOne({_id: _id}).then(foundAuthor => {
       if(error) {
         return error;
       } else {
@@ -49,7 +49,7 @@ module.exports = {
       lastName: lastName,
       birthYear: birthYear,
       bio: bio
-    }}, {new: true}, error => {
+    }}, {new: true}).then(error => {
       if(error) {
         return error;
       } else {
@@ -59,7 +59,7 @@ module.exports = {
   },
   author_delete: (request, response) => {
     const { _id } = request.params;
-    Author.deleteOne({_id: _id}, error => {
+    Author.deleteOne({_id: _id}).then(error => {
       if(error) {
         return error;
       } else {

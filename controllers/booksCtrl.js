@@ -3,7 +3,7 @@ const Book = require('../models/bookModel');
 
 module.exports = {
   all_books: (request, response) => {
-    Book.find({}, (error, allBooks) => {
+    Book.find({}).then(allBooks => {
       if(error){
         return error;
       } else {
@@ -16,7 +16,7 @@ module.exports = {
   },
   book_detail: (request, response) => {
     const {_id} = request.params;
-    Book.findOne({_id: _id}, (error, foundBook) => {
+    Book.findOne({_id: _id}).then(foundBook => {
       if(error) {
         return error;
       } else {
@@ -52,7 +52,7 @@ module.exports = {
       price: price,
       starRating: starRating,
       synopsis: synopsis
-    }}, {new: true}, error => {
+    }}, {new: true}).then(error => {
       if(error) {
         return error;
       } else {
@@ -62,7 +62,7 @@ module.exports = {
   },
   book_delete: (request, response) => {
     const { _id } = request.params;
-    Book.deleteOne({_id: _id}, error => {
+    Book.deleteOne({_id: _id}).then(error => {
       if(error) {
         return error;
       } else {
