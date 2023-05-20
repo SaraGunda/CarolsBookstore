@@ -21,6 +21,12 @@ userSchema.plugin(passportLocalMongoose);
 userSchema.plugin(findOrCreate);
 
 const User = mongoose.model('User', userSchema);
+async function run (){
+  await mongoose.connect(`${process.env.DB_URL}`)
+  mongoose.model('User', userSchema)
+  await mongoose.model('User').findOne()
+}
+run()
 
 passport.use(User.createStrategy());
 
